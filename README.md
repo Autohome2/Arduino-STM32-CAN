@@ -1,5 +1,5 @@
 # Arduino-STM32-CAN
-Can Example for Arduino Core STM32.   
+Can communication example for Arduino Core STM32.   
 
 
 # Hardware requirements
@@ -13,7 +13,6 @@ Can Example for Arduino Core STM32.
 MCP2551/2561(5V)   
 TJA1040/1050/1055(5V)   
 SN65HVD230/231/232(3.3V)   
-ISO1050(3.3V)   
 
 __NOTE__:3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
 Check [here](http://e2e.ti.com/cfs-file.ashx/__key/communityserver-discussions-components-files/142/4747.2012_2D00_11_2D00_02-CAN-Transceiver-3V-and-5V-Mixed-Network-Basics.pdf) and [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
@@ -32,9 +31,15 @@ https://github.com/stm32duino/Arduino_Core_STM32
 ![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75353583-03a82280-58ef-11ea-890d-ea2c52930453.jpg)
 
 # Transmitter
-![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
 
-![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
+- from STM32F103   
+![STM32F103_Send](https://user-images.githubusercontent.com/6020549/80896902-3d9e0680-8d2e-11ea-9add-0a102f43c3a7.jpg)
+
+- from STM32F303   
+![STM32F303_Send](https://user-images.githubusercontent.com/6020549/80896905-4262ba80-8d2e-11ea-9c3b-3f4871a947bb.jpg)
+
+- from STM32F407   
+![STM32F405_Send](https://user-images.githubusercontent.com/6020549/80896908-45f64180-8d2e-11ea-91a3-c34fdb48725b.jpg)
 
 # Receiver   
 Serial printing goes to PA9.   
@@ -50,12 +55,12 @@ You can use [this](https://github.com/collin80/due_can) library.
 
 # Communication with ESP8266
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
-![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/75881239-feecec80-5e61-11ea-88c9-22deebf346ff.jpg)
+![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/79196756-9a16b000-7e6b-11ea-8d60-5afee96794bd.jpg)
 
 # Communication with ESP32
 ESP-IDE has a CAN Network example.   
 https://github.com/espressif/esp-idf/tree/master/examples/peripherals/can/can_network
-![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/76674295-11e58680-65f1-11ea-8489-15e99bbd873a.jpg)
+![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/79196765-9e42cd80-7e6b-11ea-8fa9-a31c3ec9334b.jpg)
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
@@ -106,3 +111,18 @@ $ cansend can0 123#11223344AABBCCDD
 ```
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/75351666-d60daa00-58eb-11ea-8eca-ba74cf916439.jpg)
+
+
+# Troubleshooting   
+There is a module of SN65HVD230 like this.   
+The terminating resistance is 120 ohms.   
+![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
+![SN65HVD230-2](https://user-images.githubusercontent.com/6020549/80897500-4e517b00-8d34-11ea-9025-7c43e8b62366.JPG)
+
+A transmission error will occur.   
+![SendFail](https://user-images.githubusercontent.com/6020549/80897131-98d0f880-8d30-11ea-96b6-05e50ac740a3.jpg)
+
+I have removed the terminating resistor.   
+And I used a external resistance of 150 ohms.   
+The error is fixed.   
+![SN65HVD230-3](https://user-images.githubusercontent.com/6020549/80897501-4eea1180-8d34-11ea-9f26-d3bedc72ea1f.JPG)
